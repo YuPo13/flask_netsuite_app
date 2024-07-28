@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Invoice</title>
+    <script>
+        function submitInvoice() {
+            document.getElementById('response').innerHTML=''
+            const apiKey = "{{ api_key }}";
+            const entityId = document.getElementById('entity_id').value;
+            const locationId = document.getElementById('location_id').value;
+
+            const items = [];
+            document.querySelectorAll('.item-row').forEach(row => {
+                const itemId = row.querySelector('.item_id').value;
+                const rate = parseFloat(row.querySelector('.rate').value);
+                const quantity = parseInt(row.querySelector('.quantity').value);
+                items.push({ item: { id: itemId }, rate, quantity });
+            });
+
+            const invoiceData = {
+                entity: { id: entityId },
+                location: { id: locationId },
+                item: { items }
+            };
+
+            fetch('/new_invoice_status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'api_key': apiKey
+                },
+                body: JSON.stringify(invoiceData)
+            })
+            .then(response => {
+    // Check if the response is OK (status code 200-299)
+    if (!response.ok) {
+        return response.json().then(data => {
+            // If response is not OK, throw an error with details
+            throw new Error(data.error || 'Unknown error occurred');
+        });
+    }
+    else {
+        document.getElementById('response').innerHTML = `<h2><p style="color: green;">Success: your invoice has been created in Netsuite</p></h2>`;
+    }
+
+})
+.then(data => {
+    // Handle successful response
+    //document.getElementById('response').innerHTML = `<h2><p style="color: green;">Success: ${response.status_code}</p></>h2>`;
+})
+.catch(error => {
+    // Handle errors
+    document.getElementById('response').innerHTML = `<h2><p style="color: red;">Error: ${error.message}</p></h2>`;
+});
+        }
+
+        function addItemRow() {
+            const itemTable = document.getElementById('item_table');
+            const rowCount = itemTable.rows.length;
+            const row = itemTable.insertRow(rowCount);
+            row.className = 'item-row';
+            row.innerHTML = `
+                <td><input type="text" class="item_id" placeholder="Item ID" required></td>
+                <td><input type="number" class="rate" step="0.01" placeholder="Rate" required></td>
+                <td><input type="number" class="quantity" placeholder="Quantity" required></td>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <h1>Create Invoice</h1>
+    <form onsubmit="event.preventDefault(); submitInvoice();">
+    <div>
+        <a href="/">Go to home page with services choice</a>
+        </div>
+        <h3>Please make sure that the values of location id, entity id, item id already exist in Netsuite. Also please
+            check if recent tax and posting periods are initiated in Netsuite.</h3>
+        <h3>Minimum 1 item line should be added in order to create the invoice</h3>
+        <br>
+        <div>
+            <label for="entity_id">Entity ID:</label>
+            <input type="text" id="entity_id" required>
+        </div>
+        <div>
+            <label for="location_id">Location ID:</label>
+            <input type="text" id="location_id" required>
+        </div>
+        <table id="item_table">
+            <tr>
+                <th>Item ID</th>
+                <th>Rate</th>
+                <th>Quantity</th>
+            </tr>
+
+        </table>
+        <button type="button" onclick="addItemRow()">Add Item</button>
+        <button type="submit">Submit Invoice</button>
+    </form>
+    <h4>After pushing 'Submit Invoice' button please wait for a status message (should appear below)</h4>
+    <div id="response"></div>
+</body>
+</html>

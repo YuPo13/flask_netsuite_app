@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Netsuite invoices</title>
+
+</head>
+<body>
+    <h1>List of Netsuite invoices</h1>
+     <a href="/">Go to home page with services choice</a>
+     <br>
+     <p><a href="/invoice_dates">Go back to dates choice</a></p>
+        <pre>
+    {% for dict_item in response_data %}
+            {{dict_item}}
+        {% endfor %}
+    </pre>
+    </div>
+</body>
+</html>
