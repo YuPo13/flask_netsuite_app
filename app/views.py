@@ -125,4 +125,3 @@ def create_invoice_via_api():
         return jsonify(result), status_code
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-

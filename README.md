@@ -43,17 +43,18 @@ On macOS and Linux:
 export FLASK_APP=run.py
 export FLASK_ENV=development
 
-3. Run the Flask App in Terminal
+3. Add 'user_credentials.py' file to flask_netsuite_app.app folder.
+4. Run the Flask App in Terminal
 flask run
 
-4. Expected output in Terminal is as follows:
+5. Expected output in Terminal is as follows:
  * Running on http://127.0.0.1:5000
 Press CTRL+C to quit
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 491-134-281
 
-5. Open your web browser, go to http://127.0.0.1:5000 and follow proposed links
+6. Open your web browser, go to http://127.0.0.1:5000 and follow proposed links
 
 
 ## Usage
