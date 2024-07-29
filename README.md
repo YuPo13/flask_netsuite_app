@@ -1,6 +1,6 @@
 # Flask Netsuite Integration App
 
-This is a simple Flask application that allows users to retrieve invoices data within the period requested, retrieve the customers data list and create new invoices.
+This is a simple Flask application that allows users to authorize and subsequently retrieve invoices data within the period requested, retrieve the customers data list and create new invoices.
 
 ## Requirements
 
