@@ -59,9 +59,10 @@ Press CTRL+C to quit
 ## Usage
 
 Open your browser and navigate to http://127.0.0.1:5000. You will see a page with actions choice. It proposes you to:
-1) obtain Netsuite transaction data (invoice record type) in requested time period. In order to do that follow the link "to retrieve the list of invoices from Netsuite", input respective time period start and end dates and push 'Submit' button. You'll be re-adressed to results page;
-2) obtain customers' data. In order to do that follow the link "to retrieve the list of clients from Netsuite". You'll be re-adressed to results page;
-3) create new invoice from UI proposed. In order to do that follow the link "to create a new invoice in Netsuite", follow instructions and input respective values: 
+1) login with your credentials. As of now no db is instantiated and for testing purposes a limited number of users are authorized.
+2) obtain Netsuite transaction data (invoice record type) in requested time period. In order to do that follow the link "to retrieve the list of invoices from Netsuite", input respective time period start and end dates and push 'Submit' button. You'll be re-adressed to results page;
+3) obtain customers' data. In order to do that follow the link "to retrieve the list of clients from Netsuite". You'll be re-adressed to results page;
+4) create new invoice from UI proposed. In order to do that follow the link "to create a new invoice in Netsuite", follow instructions and input respective values: 
     -> entity_id: ID of respective customer from Netsuite (i.e. it should exist in respective Netsuite listing). Has to be input as string, surrounded by quotation marks (e.g., "1341")
     -> location_id: ID of respective location from Netsuite (i.e. it should exist in respective Netsuite listing). Has to be input as string, surrounded by quotation marks (e.g., "6")
     -> item_id: ID of respective item from Netsuite (i.e. it should exist in respective Netsuite listing). Has to be input as string, surrounded by quotation marks (e.g., "252")
