@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from flask_login import UserMixin
 from typing import List, Dict, Any
 
 
@@ -28,3 +29,10 @@ class InvoiceData(BaseModel):
     entity: Entity
     location: Location
     item: ItemContainer
+
+
+class User(UserMixin):
+    def __init__(self, id, username, password):
+        self.id = id
+        self.username = username
+        self.password = password

@@ -1,11 +1,16 @@
 import os
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
 
 class Config:
     api_key = os.getenv('API_KEY', 'your_api_key')
+    secret_key = os.getenv('SECRET_KEY', 'your_secret_key')
+    jwt_secret_key = os.environ.get('JWT_SECRET_KEY', 'default_jwt_secret_key')
+    jwt_access_token_expires = timedelta(hours=1)
+    jwt_algorithm = os.environ.get('JWT_ALGORITHM', 'default_jwt_algorithm')
     client_id = os.getenv('NETSUITE_CLIENT_ID', 'your_client_id')
     client_secret = os.getenv('NETSUITE_CLIENT_SECRET', 'your_client_secret')
     redirect_uri = os.getenv('NETSUITE_REDIRECT_URI', 'your_redirect_uri')

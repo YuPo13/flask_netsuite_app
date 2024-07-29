@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Invoice</title>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('jwt_token');
+            if (token) {
+                window.location.href = '/new_invoice';
+        } else {
+            window.location.href = '/login';
+        }
+    });
         function submitInvoice() {
             document.getElementById('response').innerHTML=''
             const apiKey = "{{ api_key }}";

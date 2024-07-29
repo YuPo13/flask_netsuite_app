@@ -18,5 +18,16 @@
         <input type="submit" value="Submit">
         <br>
     </form>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('jwt_token');
+            if (token) {
+                window.location.href = '/invoice_dates';
+        } else {
+            window.location.href = '/login';
+        }
+    });
+
+    </script>
 </body>
 </html>

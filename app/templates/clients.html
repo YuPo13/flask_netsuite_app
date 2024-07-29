@@ -14,6 +14,37 @@
             {{dict_item}}
         {% endfor %}
     </pre>
-    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('jwt_token');
+            if (token) {
+                fetch('/clients', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const clientsData = document.getElementById('clientsData');
+                    clientsData.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Handle errors, e.g., redirect to login if unauthorized
+                    window.location.href = '/login';
+                });
+            } else {
+                // If no token, redirect to login
+                window.location.href = '/login';
+            }
+        });
+
+    </script>
 </body>
 </html>

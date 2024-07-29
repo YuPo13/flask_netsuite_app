@@ -7,10 +7,50 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h4><p>Please visit the following links in order</p></h4>
-    <p><a href={{url_for('choose_invoice_dates')}}> to retrieve the list of invoices from Netsuite</a></p>
-    <p><a href={{url_for('list_clients')}}> to retrieve the list of clients from Netsuite</a></p>
-    <p><a href={{url_for('enter_invoice_details')}}> to create a new invoice in Netsuite</a></p>
+<h4><p>To start using this app please login (if you haven't done this yet):</p></h4>
+<button id="loginBtn">Login</button>
+    <h4><p>Please visit the following links in order to</p></h4>
+    <button style="color: green;" id="invoiceDatesBtn">retrieve the list of invoices from Netsuite</button>
+    <p><button style="color: green;" id="clientsBtn">retrieve the list of clients from Netsuite</button></p>
+    <p><button style="color: green;" id="newInvoiceBtn"> create a new invoice in Netsuite</button></p>
+<br>
+    <button id="logoutBtn">Logout</button>
+<script>
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            window.location.href = '/login';
+});
 
+    document.getElementById('invoiceDatesBtn').addEventListener('click', function() {
+    const token = localStorage.getItem('jwt_token');
+        if (token) {
+            window.location.href = '/invoice_dates';
+        } else {
+            window.location.href = '/login';
+        }
+    });
+
+        document.getElementById('clientsBtn').addEventListener('click', function() {
+        const token = localStorage.getItem('jwt_token');
+        if (token) {
+            window.location.href = '/clients';
+        } else {
+            window.location.href = '/login';
+        }
+    });
+
+        document.getElementById('newInvoiceBtn').addEventListener('click', function() {
+        const token = localStorage.getItem('jwt_token');
+        if (token) {
+            window.location.href = '/new_invoice';
+        } else {
+            window.location.href = '/login';
+        }
+    });
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('jwt_token');
+            window.location.href = '/login';
+        });
+    </script>
 </body>
 </html>
